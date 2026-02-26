@@ -1,0 +1,166 @@
+{
+    "id": "web-mcp-tools",
+    "name": "WebMCP Platform",
+    "description": "Tools for the WebMCP platform itself — pricing, documentation, catalog browsing, SDK generation, and platform status.",
+    "category": "Platform",
+    "icon": "settings",
+    "version": "1.0.0",
+    "author": "WebMCP",
+    "tags": [
+        "webmcp",
+        "platform",
+        "meta",
+        "docs",
+        "saas"
+    ],
+    "tools": [
+        {
+            "name": "get_pricing",
+            "description": "Get WebMCP pricing plans with features, limits, and pricing details. Useful for recommending the right plan based on user needs.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "plan": {
+                        "type": "string",
+                        "description": "Optional specific plan to get details for (e.g. 'free', 'pro', 'enterprise'). Omit to get all plans.",
+                        "enum": [
+                            "free",
+                            "pro",
+                            "enterprise"
+                        ]
+                    }
+                }
+            },
+            "readOnly": true
+        },
+        {
+            "name": "search_docs",
+            "description": "Search the WebMCP documentation and FAQ. Returns relevant articles with titles, summaries, and links.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Search query (e.g. 'how to add a tool', 'A/B testing setup', 'SDK integration')"
+                    },
+                    "limit": {
+                        "type": "number",
+                        "description": "Maximum number of results to return",
+                        "default": 5
+                    }
+                },
+                "required": [
+                    "query"
+                ]
+            },
+            "readOnly": true
+        },
+        {
+            "name": "list_catalog_tools",
+            "description": "Browse the open-source WebMCP tool catalog. Returns available tool packages with descriptions, categories, and tool counts.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "category": {
+                        "type": "string",
+                        "description": "Optional category filter (e.g. 'Starter', 'E-Commerce', 'CMS', 'Enterprise CMS/DAM')"
+                    }
+                }
+            },
+            "readOnly": true
+        },
+        {
+            "name": "get_sdk_snippet",
+            "description": "Generate the SDK embed code (script tag) for a given site. Returns the HTML snippet ready to paste into any website.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "site_id": {
+                        "type": "string",
+                        "description": "The site UUID to generate the snippet for"
+                    },
+                    "options": {
+                        "type": "object",
+                        "description": "Optional configuration",
+                        "properties": {
+                            "async": {
+                                "type": "boolean",
+                                "description": "Add async attribute",
+                                "default": true
+                            },
+                            "defer": {
+                                "type": "boolean",
+                                "description": "Add defer attribute",
+                                "default": false
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "site_id"
+                ]
+            },
+            "readOnly": true
+        },
+        {
+            "name": "check_webmcp_support",
+            "description": "Check if the current browser supports the WebMCP API (navigator.modelContext). Returns support status and available features.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            },
+            "readOnly": true
+        },
+        {
+            "name": "estimate_usage",
+            "description": "Estimate which WebMCP plan fits based on the number of tools and expected monthly traffic. Returns a recommendation with cost breakdown.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "tool_count": {
+                        "type": "number",
+                        "description": "Number of tools to register"
+                    },
+                    "monthly_page_views": {
+                        "type": "number",
+                        "description": "Expected monthly page views"
+                    },
+                    "sites": {
+                        "type": "number",
+                        "description": "Number of sites/domains",
+                        "default": 1
+                    }
+                },
+                "required": [
+                    "tool_count",
+                    "monthly_page_views"
+                ]
+            },
+            "readOnly": true
+        },
+        {
+            "name": "get_changelog",
+            "description": "Get the latest WebMCP platform updates, features, and improvements. Returns recent changelog entries.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "limit": {
+                        "type": "number",
+                        "description": "Number of entries to return",
+                        "default": 5
+                    }
+                }
+            },
+            "readOnly": true
+        },
+        {
+            "name": "get_platform_status",
+            "description": "Get the current WebMCP platform status — API health, SDK CDN status, and any ongoing incidents.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            },
+            "readOnly": true
+        }
+    ]
+}
