@@ -1,6 +1,6 @@
 # WebMCP Tools
 
-**Open-source tool implementations for the [WebMCP](https://webmcp.io) platform.**
+**Open-source tool implementations for the [Web-MCP.tools](https://web-mcp.tools/) platform.**
 
 Each tool is a self-contained folder with:
 - `config.json` — metadata, schema definitions, and tool descriptions
