@@ -1,0 +1,91 @@
+{
+    "id": "generic-website",
+    "name": "Generic Website",
+    "description": "Starter tool set for any website — search content, get page info, submit forms, and navigate between pages.",
+    "category": "Starter",
+    "icon": "globe",
+    "version": "1.0.0",
+    "author": "WebMCP",
+    "tags": [
+        "starter",
+        "website",
+        "generic"
+    ],
+    "tools": [
+        {
+            "name": "search",
+            "description": "Search the website content. Returns matching pages with titles, URLs, and relevant excerpts.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Search query"
+                    },
+                    "limit": {
+                        "type": "number",
+                        "description": "Maximum number of results to return",
+                        "default": 10
+                    }
+                },
+                "required": [
+                    "query"
+                ]
+            },
+            "readOnly": true
+        },
+        {
+            "name": "get_page_info",
+            "description": "Get structured information about a specific page — title, description, headings, main content, and metadata.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "path": {
+                        "type": "string",
+                        "description": "Page path relative to the site root (e.g. \"/about\", \"/products/widget\")"
+                    }
+                },
+                "required": [
+                    "path"
+                ]
+            },
+            "readOnly": true
+        },
+        {
+            "name": "submit_form",
+            "description": "Submit a form on the website (e.g. contact form, newsletter signup). Input fields depend on the form.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "formId": {
+                        "type": "string",
+                        "description": "Identifier of the form to submit (e.g. \"contact\", \"newsletter\")"
+                    },
+                    "fields": {
+                        "type": "object",
+                        "description": "Key-value pairs of form field names and values"
+                    }
+                },
+                "required": [
+                    "formId",
+                    "fields"
+                ]
+            },
+            "readOnly": false
+        },
+        {
+            "name": "list_pages",
+            "description": "List all available pages and their descriptions. Useful for site navigation and discovery.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "section": {
+                        "type": "string",
+                        "description": "Optional section to filter pages (e.g. \"blog\", \"products\", \"docs\")"
+                    }
+                }
+            },
+            "readOnly": true
+        }
+    ]
+}

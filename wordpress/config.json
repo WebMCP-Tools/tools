@@ -1,0 +1,110 @@
+{
+    "id": "wordpress",
+    "name": "WordPress",
+    "description": "AI tools for WordPress sites — search posts, get page content, manage comments, and browse categories.",
+    "category": "CMS",
+    "icon": "file-text",
+    "version": "1.0.0",
+    "author": "WebMCP",
+    "tags": [
+        "wordpress",
+        "cms",
+        "blog",
+        "content"
+    ],
+    "tools": [
+        {
+            "name": "search_posts",
+            "description": "Search blog posts and pages by keyword. Returns titles, excerpts, authors, dates, and categories.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Search query"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Content type to search",
+                        "enum": [
+                            "post",
+                            "page",
+                            "any"
+                        ],
+                        "default": "any"
+                    },
+                    "category": {
+                        "type": "string",
+                        "description": "Filter by category slug"
+                    },
+                    "limit": {
+                        "type": "number",
+                        "description": "Number of results",
+                        "default": 10
+                    }
+                },
+                "required": [
+                    "query"
+                ]
+            },
+            "readOnly": true
+        },
+        {
+            "name": "get_post",
+            "description": "Get the full content of a post or page by ID or slug, including body, author, featured image, and metadata.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "idOrSlug": {
+                        "type": "string",
+                        "description": "Post/page ID or URL slug"
+                    }
+                },
+                "required": [
+                    "idOrSlug"
+                ]
+            },
+            "readOnly": true
+        },
+        {
+            "name": "list_categories",
+            "description": "List all categories with post counts. Useful for browsing and navigation.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            },
+            "readOnly": true
+        },
+        {
+            "name": "submit_comment",
+            "description": "Submit a comment on a blog post.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "postId": {
+                        "type": "string",
+                        "description": "ID of the post to comment on"
+                    },
+                    "author": {
+                        "type": "string",
+                        "description": "Comment author name"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "Comment author email"
+                    },
+                    "content": {
+                        "type": "string",
+                        "description": "Comment text"
+                    }
+                },
+                "required": [
+                    "postId",
+                    "author",
+                    "content"
+                ]
+            },
+            "readOnly": false
+        }
+    ]
+}

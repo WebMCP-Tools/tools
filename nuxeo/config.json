@@ -1,0 +1,130 @@
+{
+    "id": "nuxeo",
+    "name": "Nuxeo",
+    "description": "AI tools for Nuxeo Content Services Platform — search, browse, and manage documents in the Nuxeo repository.",
+    "category": "Enterprise CMS/DAM",
+    "icon": "database",
+    "version": "1.0.0",
+    "author": "WebMCP",
+    "tags": [
+        "enterprise",
+        "cms",
+        "dam",
+        "ecm",
+        "nuxeo"
+    ],
+    "tools": [
+        {
+            "name": "nuxeo_search",
+            "description": "Search for documents in the Nuxeo repository using full-text or NXQL queries. Returns document titles, types, paths, and metadata.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Full-text search query or NXQL expression (e.g. \"SELECT * FROM Document WHERE dc:title LIKE '%report%'\")"
+                    },
+                    "pageSize": {
+                        "type": "number",
+                        "description": "Number of results to return (default: 10, max: 100)",
+                        "default": 10
+                    },
+                    "currentPageIndex": {
+                        "type": "number",
+                        "description": "Zero-based page index for pagination",
+                        "default": 0
+                    }
+                },
+                "required": [
+                    "query"
+                ]
+            },
+            "readOnly": true
+        },
+        {
+            "name": "nuxeo_get_document",
+            "description": "Retrieve a document by its ID or path. Returns full metadata including title, type, lifecycle state, contributors, and custom properties.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "idOrPath": {
+                        "type": "string",
+                        "description": "Document UUID or absolute path (e.g. \"/default-domain/workspaces/my-workspace/my-doc\")"
+                    }
+                },
+                "required": [
+                    "idOrPath"
+                ]
+            },
+            "readOnly": true
+        },
+        {
+            "name": "nuxeo_browse",
+            "description": "List child documents of a folder. Useful for exploring the repository structure and navigating the folder tree.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "parentPath": {
+                        "type": "string",
+                        "description": "Absolute path of the parent folder (e.g. \"/default-domain/workspaces\")",
+                        "default": "/default-domain"
+                    }
+                }
+            },
+            "readOnly": true
+        },
+        {
+            "name": "nuxeo_create_document",
+            "description": "Create a new document (File, Note, Workspace, or custom type) in a specific folder.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "parentPath": {
+                        "type": "string",
+                        "description": "Absolute path of the parent folder where the document will be created"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Document type (e.g. \"File\", \"Note\", \"Workspace\", \"Folder\")"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "Title of the new document"
+                    },
+                    "properties": {
+                        "type": "object",
+                        "description": "Additional properties to set (e.g. {\"dc:description\": \"My document\"})"
+                    }
+                },
+                "required": [
+                    "parentPath",
+                    "type",
+                    "title"
+                ]
+            },
+            "readOnly": false
+        },
+        {
+            "name": "nuxeo_start_workflow",
+            "description": "Start a workflow on a document. Common workflows include Serial Review and Parallel Review.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "documentId": {
+                        "type": "string",
+                        "description": "UUID of the document to start the workflow on"
+                    },
+                    "workflowModelName": {
+                        "type": "string",
+                        "description": "Name of the workflow model (e.g. \"SerialDocumentReview\", \"ParallelDocumentReview\")"
+                    }
+                },
+                "required": [
+                    "documentId",
+                    "workflowModelName"
+                ]
+            },
+            "readOnly": false
+        }
+    ]
+}

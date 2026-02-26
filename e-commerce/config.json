@@ -1,0 +1,121 @@
+{
+    "id": "e-commerce",
+    "name": "E-Commerce",
+    "description": "AI tools for online stores — search products, manage cart, check order status, and handle customer support.",
+    "category": "E-Commerce",
+    "icon": "shopping-cart",
+    "version": "1.0.0",
+    "author": "WebMCP",
+    "tags": [
+        "e-commerce",
+        "shop",
+        "shopify",
+        "woocommerce",
+        "store"
+    ],
+    "tools": [
+        {
+            "name": "search_products",
+            "description": "Search the product catalog by keyword, category, or filters. Returns product names, prices, images, and availability.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Search query (e.g. \"blue running shoes\")"
+                    },
+                    "category": {
+                        "type": "string",
+                        "description": "Filter by category name"
+                    },
+                    "minPrice": {
+                        "type": "number",
+                        "description": "Minimum price filter"
+                    },
+                    "maxPrice": {
+                        "type": "number",
+                        "description": "Maximum price filter"
+                    },
+                    "limit": {
+                        "type": "number",
+                        "description": "Number of results to return",
+                        "default": 10
+                    }
+                },
+                "required": [
+                    "query"
+                ]
+            },
+            "readOnly": true
+        },
+        {
+            "name": "get_product",
+            "description": "Get full details for a specific product — title, description, variants, pricing, stock, and reviews.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "productId": {
+                        "type": "string",
+                        "description": "Product ID or slug"
+                    }
+                },
+                "required": [
+                    "productId"
+                ]
+            },
+            "readOnly": true
+        },
+        {
+            "name": "add_to_cart",
+            "description": "Add a product to the shopping cart.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "productId": {
+                        "type": "string",
+                        "description": "Product ID to add"
+                    },
+                    "variantId": {
+                        "type": "string",
+                        "description": "Variant ID (e.g. size/color combination)"
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "description": "Quantity to add",
+                        "default": 1
+                    }
+                },
+                "required": [
+                    "productId"
+                ]
+            },
+            "readOnly": false
+        },
+        {
+            "name": "get_cart",
+            "description": "View the current shopping cart contents — items, quantities, prices, and total.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            },
+            "readOnly": true
+        },
+        {
+            "name": "check_order_status",
+            "description": "Check the status of an existing order — shipping status, tracking info, and estimated delivery.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "orderId": {
+                        "type": "string",
+                        "description": "Order ID or confirmation number"
+                    }
+                },
+                "required": [
+                    "orderId"
+                ]
+            },
+            "readOnly": true
+        }
+    ]
+}

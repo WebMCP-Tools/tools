@@ -1,0 +1,89 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://github.com/WebMCP-Tools/tools/schema.json",
+    "title": "WebMCP Tool Configuration",
+    "description": "Schema for tool config.json files in the WebMCP-Tools/tools repository",
+    "type": "object",
+    "required": [
+        "id",
+        "name",
+        "description",
+        "category",
+        "icon",
+        "version",
+        "author",
+        "tags",
+        "tools"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "description": "Unique tool identifier (must match folder name)",
+            "pattern": "^[a-z0-9-]+$"
+        },
+        "name": {
+            "type": "string",
+            "description": "Human-readable tool name"
+        },
+        "description": {
+            "type": "string",
+            "description": "Brief description of the tool set"
+        },
+        "category": {
+            "type": "string",
+            "description": "Tool category (e.g. CMS, E-Commerce, Starter)"
+        },
+        "icon": {
+            "type": "string",
+            "description": "Icon name from the Lucide icon set"
+        },
+        "version": {
+            "type": "string",
+            "description": "Semantic version",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "author": {
+            "type": "string",
+            "description": "Author name or organization"
+        },
+        "tags": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Searchable tags"
+        },
+        "tools": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "type": "object",
+                "required": [
+                    "name",
+                    "description",
+                    "inputSchema",
+                    "readOnly"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Function name (must match export in handler.js)",
+                        "pattern": "^[a-z_][a-z0-9_]*$"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "What this tool does"
+                    },
+                    "inputSchema": {
+                        "type": "object",
+                        "description": "JSON Schema for tool input parameters"
+                    },
+                    "readOnly": {
+                        "type": "boolean",
+                        "description": "Whether the tool only reads data (true) or can mutate state (false)"
+                    }
+                }
+            }
+        }
+    }
+}
